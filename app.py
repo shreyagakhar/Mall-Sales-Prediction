@@ -3,14 +3,14 @@ import pickle
 import pandas as pd
 import numpy as np
 
-df= pd.read_csv(r'C:\Users\Lenovo\Desktop\Mall_data\Deployment\Mall_df.csv')
+df= pd.read_csv('Mall_df.csv')
 df= df.set_index('date')
 df.index = pd.to_datetime(df.index).normalize()
 df.columns= ['Past Sales']
 
-tes= pickle.load(open(r'C:\Users\Lenovo\Desktop\Mall_data\Deployment\tes.pkl', 'rb'))
-arima= pickle.load(open(r'C:\Users\Lenovo\Desktop\Mall_data\Deployment\arima.pkl', 'rb'))
-sarima= pickle.load(open(r'C:\Users\Lenovo\Desktop\Mall_data\Deployment\sarima.pkl', 'rb'))
+tes= pickle.load(open('tes.pkl', 'rb'))
+arima= pickle.load(open('arima.pkl', 'rb'))
+sarima= pickle.load(open('sarima.pkl', 'rb'))
 
 st.title('Predicting Overall Mall Sales')
 
@@ -38,5 +38,6 @@ if st.button("Generate Forecast"):
         new_df = pd.concat([df, forecast_df], axis=1)
         st.line_chart(new_df, x_label='Dates', y_label='Sales', color=['blue', 'orange'])
         st.dataframe(forecast_df)
+
 
 
